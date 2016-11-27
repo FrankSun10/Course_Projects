@@ -1,0 +1,57 @@
+########################################################################
+# CSE 241 LAB 1 GRADING RUBRIC
+
+Repo Name (WUSTL key):yanqing.sun
+
+Language used:java
+
+Name of grader:Sean Zheng
+
+OVERALL GRADE: 94
+
+///////////////////////////////////////////////////////////////////////
+
+Lateness penalty (if any):
+
+///////////////////////////////////////////////////////////////////////
+
+###### PART 1 (75%)
+
+# CORRECTNESS OF CODE (40%)
+I'm not crystally clear about your combineArea part of the code. 
+Yet I can't tell whether something went wrong there.
+My hunch is this part of code causes the failure of the first 6 tests.
+
+But overall good job. You are on the right track.
+
+# EFFICIENCY OF CODE (20%)
+ 
+
+# TEST CASES (8%)
+pass 4/10, -6
+
+# WRITEUP (3%)
+
+
+# CODING STYLE (4%)
+
+
+######################################################################
+
+###### PART 2 (20%)
+
+# RUNNING TIME PLOT (15%)
+
+
+# RUNNING TIME MIN, MAX, AVG (5%)
+Due to Java's runtime optimization, it is not uncommon to see 
+that the running time decreases the more times you run the code.
+For example, the average for 100 runs of 50k may be substantially
+   less than the time for a single run of 60k.
+
+
+######################################################################
+
+
+###### PART 3 (5%)
+nicely done

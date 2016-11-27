@@ -1,0 +1,55 @@
+########################################################################
+# CSE 241 LAB 4 GRADING RUBRIC
+
+Repo Name (WUSTL key): yanqing.sun
+
+Language used: java
+
+Name of grader: Zhengdao Chen
+
+OVERALL GRADE: 110
+
+///////////////////////////////////////////////////////////////////////
+
+Lateness penalty (if any):
+
+///////////////////////////////////////////////////////////////////////
+
+###### PRIORITY QUEUE (50% total)
+
+### MIN and ISEMPTY (6%)
+
+### INSERT (10%)
+
+### EXTRACTMIN (10%)
+
+### HANDLES (4%)
+
+### DECREASEKEY (6%)
+
+### TOSTRING (2%)
+
+### TEST CASES (9%)
+
+### WRITEUP (1%)
+
+### CODING STYLE (2%)
+
+######################################################################
+
+###### SHORTEST PATHS(50%)
+
+### SHORTESTS PATHS COMPUTATION 20%)
+
+### TRACEBACK ALGORITHM (15%)
+
+### TEST CASES (12%)
+
+### WRITEUP (1%)
+
+### CODING STYLE (2%)
+
+######################################################################
+
+###### EXTRA CREDIT (10%)
+

@@ -1,0 +1,49 @@
+########################################################################
+# CSE 241 LAB 3 GRADING RUBRIC
+
+Repo Name (WUSTL key):yangqing.sun	
+
+Language used:Java
+
+Name of grader:Hongkai Chen
+
+OVERALL GRADE:100
+
+///////////////////////////////////////////////////////////////////////
+
+Lateness penalty (if any):N/A
+
+///////////////////////////////////////////////////////////////////////
+
+###### PART 1 (70% total)
+
+### INSERT (13%)
+
+N/A
+### REMOVE (12%)
+
+N/A
+### FINDMOSTRECENT (12%)
+
+N/A
+### FINDRANGE (13%)
+N/A
+
+### TEST CASES (15%)
+N/A
+
+### WRITEUP (3%)
+N/A
+
+### CODING STYLE (2%)
+N/A
+
+######################################################################
+
+###### PART 2 (30%)
+
+# DYNAMICALLY RESIZING HEAD AND TAIL (15%)
+N/A
+
+# SINGLY-LINKED SKIP LIST (15%)
+N/A

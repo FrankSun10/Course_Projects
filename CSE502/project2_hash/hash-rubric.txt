@@ -1,0 +1,53 @@
+########################################################################
+# CSE 241 LAB 2 GRADING RUBRIC
+
+Repo Name (WUSTL key):yanqing.sun
+
+Language used:java
+
+Name of grader:Sean Zheng
+
+OVERALL GRADE:100
+nicely done
+
+///////////////////////////////////////////////////////////////////////
+
+Lateness penalty (if any):
+
+///////////////////////////////////////////////////////////////////////
+
+###### PART 1 (70% total)
+
+
+### HASH FUNCTIONS (20% total)
+
+# HASH FUNCTION IMPLEMENTATION (10%)
+
+# SLOT SEQUENCE (10%)
+
+
+### TABLE OPERATIONS (30% total)
+
+# INSERT / DELETE (15%)
+Note: in the finalhash, you can integrate base and step check into one part.
+
+# FIND (15%)
+
+
+### TEST CASES (12%)
+
+
+### WRITEUP (4%)
+
+
+### CODING STYLE (4%)
+
+
+######################################################################
+
+###### PART 2 (30%)
+
+# SHORT-CIRCUITING STRING COMPARISON (10%)
+
+
+# DYNAMIC RESIZING (20%)

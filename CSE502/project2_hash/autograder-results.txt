@@ -1,0 +1,20 @@
+*** RUNNING PRE-TURNIN TESTS ON 2015-12-11 09:28:55 CST ***
+* Language is Java
+
+* Running test #1
+* Arguments: 4 hash/case1-corpus hash/case1-pattern hash/case1-mask
++++ PASSED test #1
+
+* Running test #2
+* Arguments: 16 hash/case2-corpus hash/case2-pattern hash/case2-mask
++++ PASSED test #2
+
+* Running test #3
+* Arguments: 18 hash/case3-corpus hash/case3-pattern
++++ PASSED test #3
+
+* Running test #4
+* Arguments: 180 hash/case4-corpus hash/case4-pattern hash/case4-mask
++++ PASSED test #4
+
+* Passed 4/4 tests
