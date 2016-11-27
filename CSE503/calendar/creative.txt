@@ -1,0 +1,16 @@
+1.Team members:
+	 Frank Sun (Yanqing Sun), 443269
+	 Samuer Teeter,  444847
+
+2. link: http://ec2-54-165-154-170.compute-1.amazonaws.com/~FrankSun/module5/calendar.php#!
+
+
+3. we followed the recommended creative instructions, which are as follows:
+
+	(1) Users can specify the category of the event when they create or edit the event. The category includes "urgent", "important" and "normal"
+	(2) Users can share an particular event to one or multiple registered users. Users can view events that were shared to them and remove the 
+	shared the events and go back to their own calendar.
+	(3) Users can create new groups and add users to them.
+
+4.
+	No specific infomation would be needed to access the page. If you like, you could use the user I created during test, username:Frank, pass:1

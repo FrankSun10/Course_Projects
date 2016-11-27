@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Chat Room</title>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styleSheet.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="linkify.min.js"></script>
+        <script src="linkify-jquery.min.js"></script>
+    </head>
+   <body>
+        <div id="header-div">
+            <p id="title">AWESOME CHAT ROOM</p>
+            
+        </div>
+        <!-- div for the fist main part including userlist message board and room list-->
+        <div id="chat-div">
+            <!-- user board-->
+            <div id="user-board"> 
+                <div id="user-board-header" class="board-header">Uses</div>
+                <div id="user-board-body" class="board-body">
+                    <!-- 
+                    <div class="board-list">This is a test for user list</div>
+                    <div class="board-list">This is a test for user list</div>
+                -->
+                </div>
+                <!-- button for kicking users-->
+                <div id="kick-user-block">
+                    <button id="kick-user-button">Kick a user</button>
+                </div>
+                <!--button for banning users-->
+                <div id="ban-user-block">
+                    <button id="ban-user-button">Ban a user</button>
+                </div>
+            </div>
+            <!-- message board-->
+            <div id="message-board" >
+                <div id="message-board-header" class="board-header">
+                    <span id= "message-board-header-span">Message Board</span>
+                    <input type="button" id="leave-room-button" value="Leave"/>
+                </div>
+                <div id="message-board-body" class="board-body">
+                    <ul id="message-list">
+                        <!-- dispaly formatting
+                        <li class="message-list"><span class="username-span">UserA: </span> <span class="message-span" >Test for message </span></li>
+                        -->
+                    </ul>
+                </div>
+                <!--name link-->
+                <a href="#!" id="get-name-link">Get started by having a name</a>
+                <!-- div for sending messages-->
+                <div id="message-send-block" style="display: none;">
+                    <div id="message-input">
+                        <textarea id="message-input-box" rows="2" cols="55" placeholder="Type here and send message"></textarea>
+                    </div>
+                    <button id= "message-send-button" >Send</button>
+                </div>
+            </div>
+            <!--room board-->
+            <div id="room-board">
+                <div id="room-board-header" class="board-header">Rooms</div>
+                <div id="room-board-body" class="board-body">
+                    <div class="board-list"><a  href="#!">This is a test for room list</a> </div>
+                    <div class="board-list"><a  href="#!">This is a test for room list</a></div>      
+                </div>
+                <!-- button for creating rooms-->
+                <div id="create-room-block">   
+                    <button id="create-room-button">Create a room</button> 
+                </div>
+            </div>
+        </div>
+        
+        <!-- form for input a valid user name-->
+        <div id="make-name-form" class="dialog-form" title="Input a username">
+            <input type="text" id="name-input-box" /> <br>
+            <p id="name-input-error"></p>
+            <input type="button" id="name-input-submit-button" class="dialog-form-button" value="Submit" />
+        </div>
+        
+        <!-- form for create room -->
+        <div id="create-room-form" class="dialog-form" title="Creat a chat room">
+            Room name:<br>
+            <input type="text" id="room-name-input-box"/> <br><br>
+            Category: <br>
+            <input type="radio" name="room-category" id="room-category-academic" value="academic"/>  academic
+            <input type="radio" name="room-category" id="room-category-social" value="social"/> social
+            <input type="radio" name="room-category" id="room-category-other" value="other"/> other
+            <br><br>
+            <a href="#!" id="password-input-link">Input a password? </a><br><br>
+            <input type="password" id="password-input-box" /><br><br>
+            <input type="button" id="create-room-submit-button" class="dialog-form-button" value="Submit"/>
+        </div>
+        
+        <!-- forms  for inputting password-->
+        <div id="password-verify-form" class="dialog-form" title="Input password">
+            <input type="password" id="password-verify-input"/> <br>
+            <p id="password-verify-error">password is not correct</p>
+            <input type="button" id="password-verify-submit-button" class="dialog-form-button" value="Submit" />
+        </div>
+        
+        <!-- form for sending private message to user-->
+        <div id="private-message-dialog" class="dialog-form">
+            <p>Message:</p><br>
+            <input type="text" id="private-message-box"/><br>
+            <input type="button" id="private-message-send-button" value="Send"/>
+            <input type="hidden" id="private-message-to-user" /> <!--attach the user's name here-->
+        </div>
+          
+        <!-- form for warning the creator when leaving room-->
+        <div id="leave-room-warning" class="dialog-form" title="Warning">
+            <p> After you leaved, the chat room will be destroyed. Are you sure you want to leave?</p>
+            <br>
+            <input type="button" id="creator-leave-room-yes" value="Yes" class="dialog-form-button" />
+            <input type="button" id="creator-leave-room-no"  value="No" class="dialog-form-button" />
+        </div>
+        
+        <!-- form for kicking a user-->
+        <div id="kick-user-dialog" class="dialog-form" title="Kick User">
+            <p>Input the username you prompt to kick:</p>
+            <input type="text" id="user-to-be-kicked" />
+            <br>
+            <input type="button" id="kick-user-send-button" value="Send"  class="dialog-form-button"/>
+        </div>
+        
+        <!--form for banning a user-->
+        <div id="ban-user-form" class="dialog-form" title="Ban User">
+            <p>Input the username you wish to ban:</p>
+            <input type="text" id="ban-user-box"/><br>
+            <input type="button" id="ban-user-confirm-button" value="Ban" class="dialog-form-button"/>
+        </div>
+          
+        <!-- form for voting to kick a user-->
+        <div id="vote-for-kicking-user" class="dialog-form" title="Vote" >
+            <p id="kick-user-notice"></p>
+            <input type="button" id="kick-agree-button" value="Agree" class="dialog-form-button"/>
+            <input type="button" id="kick-disagree-button" value="Disagree" class="dialog-form-button" />
+        </div>
+        
+        
+        
+        
+        <script type ="text/javascript">
+            var socketio = io.connect();
+            var username; // global variable to store the username
+            var current_room;
+            var current_room_owner;  // add current_room_owner for kicking users later on
+            
+            /////////////////////////////////////////////////////////////////////////////////////// making username part
+            // add event listener for the make new name link, pops up a dialog 
+            document.getElementById("get-name-link").addEventListener("click", function(event){
+                // pop up a dialog for users to input a name
+                $("#make-name-form").dialog();
+                
+            }, false);
+            // add event listener for the submit button in make name dialog
+            var input_name = document.getElementById("name-input-box");
+            var input_name_error = document.getElementById("name-input-error");
+            document.getElementById("name-input-submit-button").addEventListener("click", function(event){
+                if (!input_name.value.trim()) { // if the string is empty or only contains whitespaces
+                    alert("Please input a name!")
+                }
+                else{
+                    // sent the name to server side
+                    socketio.emit("newuser_to_server", {"username": input_name.value.trim()}, function(data){
+                        if (data.success) { // if the username is not in the usernames on serverside
+                            $("#make-name-form").dialog('close');
+                            $("#get-name-link").hide();
+                            $("#message-send-block").show();
+                            username = data.name;
+                            alert("Congratulations, your username is: " + username);
+                            $("#create-room-button").show();
+                        }
+                        else{
+                            input_name_error.textContent = "The username already exist";
+                        }
+                    });
+                }
+                input_name.value = "";
+                input_name_error.textContent = "";
+            }, false);
+            
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////// creating room and joining room parts including updating user list
+            // add eventlistener for create room button
+            document.getElementById("create-room-button").addEventListener("click", function(event){
+                if (!username) { // not having a username
+                    alert("Please make a username first");
+                    return;
+                }
+                else if (current_room) { // currently in a particular room, force the user to leave the current room before create any new rooms
+                    alert("Please leave the current room before creating a new one");
+                    return;
+                }
+                else{
+                    $("#create-room-form").dialog();
+                    $("#password-input-box").hide();
+                }
+            }, false);
+            // add event listener for pass word input link
+            document.getElementById("password-input-link").addEventListener("click", function(){
+                $("#password-input-box").show();
+            },false);
+            // add event listener for create-room-submit-button and send data to server
+            document.getElementById("create-room-submit-button").addEventListener("click", function(){
+                var room_name = document.getElementById("room-name-input-box").value.trim();
+                var password = document.getElementById("password-input-box").value.trim();
+                var category = $('input[name="room-category"]:checked').val();
+                if (!room_name.trim()) {
+                    alert("please input a room name");
+                    return;
+                }
+                if (!category) {
+                    alert("please choose a category for the room");
+                    return;
+                }
+                // send the room name, password and category to the server side
+                socketio.emit("create_room_to_server", {"owner": username, "room_name": room_name, "password":password, "category":category}, function(data){
+                    if (!data.success) {
+                        alert("Room already exists");
+                    }
+                    else{
+                        current_room = data.room_name;
+                        current_room_owner = data.rooms[current_room].owner;
+                        $("#create-room-form").dialog("close");
+                        alert("Congratulations, you have created a room called: " + current_room);
+                        // update the user board
+                        var userNameArr = data.rooms[current_room].users_in;
+                        updateUserBoard(current_room_owner, userNameArr);     
+                        $("#kick-user-button").show(); //show kick user button
+                        $("#ban-user-button").show();
+                        join_room_display(current_room); 
+                    }
+                });
+                var room_name = document.getElementById("room-name-input-box").value = "";
+                document.getElementById("password-input-box").value ="";
+                $('input[name="room-category"]:checked').each(function(){this.checked = false;});
+            },false);
+            
+            // receive the room list from the sever
+            socketio.on("create_rooms_to_clients", function(data){
+                updateRoomBoard(data);
+            });
+            
+            // joining non-public room
+            // add event listener for the password-verify-submit-button
+            document.getElementById("password-verify-submit-button").addEventListener("click", function(event){
+                var realPass = event.target.getAttribute("data-password");
+                var inputPass = document.getElementById("password-verify-input").value;
+                if (inputPass !== realPass) { // password is not correct
+                    $("#password-verify-error").show();
+                }
+                else{
+                    $("#password-verify-form").dialog("close");
+                    joinRoom(event.target.getAttribute("data-room-name"));
+                }  
+                inputPass = "";
+            }, false);
+            
+            // receive back join-room results
+            socketio.on("join_room_to_client", function(data){ 
+                if(!data.success){
+                    alert("You are not allowed to join this room");
+                }
+            });
+            socketio.on("join_room_to_clients", function(data){
+               // update the user list and current-room
+               var roomArr = data.rooms;
+               var room_name = data.room_name;
+               var owner = roomArr[room_name].owner;
+               var userNameArr = roomArr[room_name].users_in;
+               updateUserBoard(owner,userNameArr);
+               // update the current_room
+               current_room = room_name;
+               current_room_owner = owner;
+               // update the message board header from "Message Board" to room name
+               join_room_display(room_name);
+            });
+            
+            
+            /////////////////////////////////////////////////////////////////////////////////////////////////////// sending message part
+            
+            // add event listener to send message button and send the message to server
+            document.getElementById("message-send-button").addEventListener("click", function(){
+                if (!username) {
+                    alert("please make a username first, then join a chat room");
+                    return;
+                }
+                if (!current_room) {
+                    alert("please join a chat room first");
+                    return;
+                }
+                else{
+                    sendMessage();
+                }
+                document.getElementById("message-input-box").value = "";
+            }, false);
+            
+            // receive message from sever
+            socketio.on("message_to_clients",function(data) {
+                var messageBoard = document.getElementById("message-list");
+                //first check the message for image urls
+                var urls = linkify.find(data.message);
+                for (var i=0; i<urls.length; ++i){
+                    if (urls[i].href.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                        //if the url points to an image, display it in the chat log
+                        var imageLi = document.createElement("li");
+                        imageLi.setAttribute("class", "message-list");
+                        var image = document.createElement("img");
+                        image.src = urls[i].href;
+                        image.alt = urls[i].value;
+                        image.title = urls[i].value;
+                        imageLi.appendChild(image);
+                        messageBoard.appendChild(imageLi);
+                    }
+                }
+                // append li element
+                var messageList = document.createElement("li");
+                messageList.setAttribute("class", "message-list");
+                // append username span and message span
+                var spanOne = document.createElement("span");
+                var spanTwo = document.createElement("span");
+                spanOne.setAttribute("class", "username-span");
+                spanOne.textContent = data.username + ":  ";
+                spanTwo.setAttribute("class", "message-span");
+                spanTwo.textContent = data.message;
+                //create hyperlinks
+                linkifyElement(spanTwo);
+                // append each other
+                messageBoard.appendChild(messageList);
+                messageList.appendChild(spanOne);
+                messageList.appendChild(spanTwo);
+            });
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////// leaving room part
+            // add event listener for leave button
+            document.getElementById("leave-room-button").addEventListener("click", function(event){
+                if (username == current_room_owner) {
+                    // the creator is going to leave the room, give the creator a second though
+                    $("#leave-room-warning").dialog();
+                }
+                else{
+                    socketio.emit("leave_room_to_server", {"is_owner": false, "room_name":current_room, "username": username});
+                    leave_room_display();
+                }
+            },false);
+            
+            // add event listener for yes or no
+            document.getElementById("creator-leave-room-no").addEventListener("click", function(){
+                $("#leave-room-warning").dialog("close");
+            }, false);
+            document.getElementById("creator-leave-room-yes").addEventListener("click", function(){
+                socketio.emit("leave_room_to_server", {"is_owner": true, "room_name": current_room, "username": username}); // first sent out to server
+                $("#leave-room-warning").dialog("close");
+                leave_room_display();
+                $("#kick-user-button").hide(); // hide the kick-user-button
+                $("#ban-user-button").hide();
+            },false);
+            
+            // receive back the result of users leaving room
+            socketio.on("leave_room_to_clients", function(data){
+                if (!data.isDestroyed) {
+                    updateUserBoard(current_room_owner, data.rooms[current_room].users_in);
+                }
+                else{
+                    leave_room_display();
+                    alert(data.message);
+                }
+                
+            });
+            
+            // after a room is destroyed, update the room board
+            socketio.on("room_destroyed_to_clients", function(data){
+               updateRoomBoard(data); 
+            });
+            
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////// kicking user part
+            // add event listener for kick-user-button
+            document.getElementById("kick-user-button").addEventListener("click", function(){
+                if (username != current_room_owner) {
+                    alert("Only the creator can kick user");
+                }
+                else{
+                    $("#kick-user-dialog").dialog();
+                }
+            }, false);
+            
+            //add event listener for kick-user-send-button in the pops up dialog
+            document.getElementById("kick-user-send-button").addEventListener("click", function(){
+                var user_to_be_kicked = document.getElementById("user-to-be-kicked").value;
+                if (!user_to_be_kicked.trim()) {
+                    alert("please input the name of the user you want to kick");
+                }
+                else if (user_to_be_kicked.trim() == username) {
+                    alert("please do not kick youself");
+                }
+                else{
+                    socketio.emit("kick_user_to_server", {"room_name" : current_room, "user_to_be_kicked": user_to_be_kicked});
+                    document.getElementById("user-to-be-kicked").value ="";
+                    $("#kick-user-dialog").dialog("close");
+                }
+            },false);
+            
+            // receive result for kicking user
+            socketio.on("kick_user_to_prompter", function(data){
+                if (!data.success) {
+                    alert(data.message);
+                }
+                else{
+                    alert("You will be notified only when the user has been kicked out");
+                }
+                
+            });
+            ///vote for kicking user
+            socketio.on("kick_user_to_client", function(data){
+                document.getElementById("kick-user-notice").textContent = data.vote;
+                document.getElementById("kick-agree-button").setAttribute("data-userToBeKicked", data.user_to_be_kicked);
+                $("#vote-for-kicking-user").dialog();
+            });
+            //add event listener to disagree and agree button
+            document.getElementById("kick-disagree-button").addEventListener("click", function(){
+                $("#vote-for-kicking-user").dialog("close");
+            }, false);
+            document.getElementById("kick-agree-button").addEventListener("click", function(event){
+                var user_to_be_kicked = event.target.getAttribute("data-userToBeKicked");
+                socketio.emit("vote_result_to_server", {"room_name":current_room, "room_owner": current_room_owner, "user_to_be_kicked" : user_to_be_kicked});
+                alert("You will be notified only when the user has been kicked out");
+            }, false);
+            //
+            socketio.on("vote_result_to_client", function(data){
+                if (data.success) {
+                    if (data.isTheOne) {
+                        alert(data.message);
+                        leave_room_display();
+                    }
+                    else{
+                        if (username != current_room_owner) {
+                            $("#vote-for-kicking-user").dialog("close");
+                        }
+                        alert(data.message);
+                        var userNameArr = data.rooms[current_room].users_in;
+                        updateUserBoard(current_room_owner, userNameArr); // up date the user list
+                    }
+                }
+            });
+            
+            //////////////////////////////////////////////////////////////ban user
+            //display ban user form
+            document.getElementById("ban-user-button").addEventListener("click", function(event){
+                $("#ban-user-form").dialog();
+            });
+            
+            //notify the server of ban
+            $("#ban-user-confirm-button").click(function(event){
+                var ban_username = document.getElementById("ban-user-box").value;
+                if (ban_username == username) {
+                    alert("Please do not ban yourself.");
+                }
+                else{
+                    socketio.emit("ban_user_to_server", {
+                        "ban_username":ban_username,
+                        "room_name":current_room});
+                }
+            });
+            
+            //handle the server's reply to ban--for the owner
+            socketio.on("ban_user_to_owner", function(data){
+                if (!data.success) {
+                    alert(data.message);
+                }
+                else{
+                    $("#ban-user-box").val("");
+                    $("#ban-user-form").dialog("close");
+                    alert("Ban successful");
+                }
+            });
+            
+            //get banned
+            socketio.on("ban_user_to_banned", function(data){
+                if (data.ban_username == username) {
+                    alert("You have been banned from this chatroom by the owner.");
+                    //activate the "leave" procedure, notifying the server in the process
+                    socketio.emit("leave_room_to_server", {"is_owner": false, "room_name":current_room, "username": username});
+                    leave_room_display();
+                }
+            });
+            
+            // function to handle buttons and content dispaly
+            function leave_room_display() {
+                $("#leave-room-button").hide(); // hide leave button
+                document.getElementById("message-board-header-span").textContent = "Message Board"; // restore message board header
+                $("#message-list").empty(); // empty message
+                $("#user-board-body").empty() // empty user board
+                $("#create-room-button").show(); // show create room button
+                current_room = "";
+                current_room_owner= "";
+            }
+            
+            // function to handle 
+            function join_room_display(room_name) {
+                $("#create-room-button").hide();
+                $("#leave-room-button").show();
+                document.getElementById("message-board-header-span").textContent = room_name;
+            }
+            
+            // function to send message
+            function sendMessage(){
+                var msg = document.getElementById("message-input-box").value;
+                socketio.emit("message_to_server", {"message": msg, "username": username, "room_name":current_room});
+            } 
+            
+            // function for join room
+            function joinRoom(room_name) {
+                if (!username) {
+                    alert("Please make a user name first");
+                    return;
+                }
+                else if (current_room == room_name) {
+                    alert("You are already in this room");
+                    return;
+                }
+                else if (current_room && current_room !== room_name) {
+                    alert("Please leave the current room first");
+                }
+                else{ // only allow user who has a username but not in any rooms to join a room
+                    socketio.emit("join_room_to_server", {"room_name":room_name, "username":username});
+                }
+            }
+            
+            
+            function showPrivateMessageDialog(event){
+                var message_div = document.getElementById("private-message-dialog");
+                message_div.setAttribute("title", "Private Message to "+event.target.textContent);
+                document.getElementById("private-message-to-user").value = event.target.textContent;
+                $(message_div).dialog();
+            }
+            
+            //function to update user board
+            function updateUserBoard(owner, userNameArr) {
+                $("#user-board-body").empty();
+                // append the owner and users to the users board
+                var userBoard = document.getElementById("user-board-body");
+                // first append the owner
+                var ownerList = document.createElement("div");
+                ownerList.setAttribute("class", "board-list");
+                ownerList.setAttribute ("id",owner);
+                ownerList.setAttribute("style", "background-color:#ffaa80");
+                ownerList.textContent = owner;
+                if (owner != username) {
+                    ownerList.addEventListener("click", showPrivateMessageDialog);
+                }
+                userBoard.appendChild(ownerList);
+                //append other users
+                for(var i = 0; i < userNameArr.length; ++i){
+                    var userList = document.createElement("div");
+                    userList.setAttribute("class", "board-list");
+                    userList.setAttribute("id", userNameArr[i]);
+                    userList.textContent= userNameArr[i];
+                    if (userNameArr[i] != username) {
+                        userList.addEventListener("click", showPrivateMessageDialog);
+                    }
+                    userBoard.appendChild(userList);
+                }
+            }
+        
+            
+            // function used to update room board
+            function updateRoomBoard(data) {
+                // empty the room board
+                $("#room-board-body").empty();
+                var roomBoard = document.getElementById("room-board-body");
+                var roomArr = data.rooms;
+                var roomNameArr = Object.keys(roomArr);
+                for(var i = 0; i < roomNameArr.length; ++i){
+                    var roomListChild = document.createElement("div");
+                    var roomListLink = document.createElement("a");
+                    roomListChild.setAttribute("class", "board-list");
+                    roomListChild.setAttribute("id", "div"+ roomNameArr[i]);
+                    roomListLink.setAttribute("href", "#!");
+                    roomListLink.setAttribute("id", roomNameArr[i]); // set the id of the link as the name of the room
+                    roomListLink.setAttribute("data-password", roomArr[roomNameArr[i]].password);
+                    if (!roomArr[roomNameArr[i]].password.trim()) { // no password for the room
+                        roomListLink.setAttribute("data-public", "P"); // public
+                    }
+                    else if (roomArr[roomNameArr[i]].password.trim()) { // password for the room
+                        roomListLink.setAttribute("data-public", "NP");// no public
+                    }
+                    if (roomArr[roomNameArr[i]].category == "academic") {
+                        roomListLink.setAttribute("data-category","A");
+                        roomListChild.setAttribute("style", "background-color : #4dff4d");
+                    }
+                    else if (roomArr[roomNameArr[i]].category == "social") {
+                        roomListLink.setAttribute("data-category", "S");
+                        roomListChild.setAttribute("style", "background-color : #ffff1a");
+                    }
+                    else{
+                        roomListLink.setAttribute("data-category", "other");
+                        roomListChild.setAttribute("style", "background-color : #b3b3ff");
+                    }
+                    roomListLink.textContent = roomNameArr[i] + "..." + "<" + roomListLink.getAttribute("data-category") + ", " + roomListLink.getAttribute("data-public") + ">"; // indicate if the room is a public or private
+                    roomBoard.appendChild(roomListChild);
+                    roomListChild.appendChild(roomListLink);
+                    // add event listener for each room
+                    roomListLink.addEventListener("click", function(event){
+                        if (!username) {
+                            alert("please make a username first");
+                            return;
+                        }
+                        if (event.target.getAttribute("data-public") == "NP") { // not public
+                            $("#password-verify-form").dialog();
+                            $("#password-verify-error").hide();
+                            // pass the password and the id (which is the room name) of the link to the submit button in the form
+                            document.getElementById("password-verify-submit-button").setAttribute("data-password", event.target.getAttribute("data-password"));
+                            document.getElementById("password-verify-submit-button").setAttribute("data-room-name", event.target.getAttribute("id"));
+                            // remember to add event listener to the submit button, to let the user to join the chat room
+                        }
+                        else{
+                            // directly let the user to join the chat room
+                            joinRoom(event.target.getAttribute("id"));
+                        }
+                    }, false);
+                }    
+            }
+            
+            //send private message
+            document.getElementById("private-message-send-button").addEventListener("click", function(event){
+                var to_user = document.getElementById("private-message-to-user").value;
+                var message = document.getElementById("private-message-box").value;
+                socketio.emit("private_message_to_server", {"to_user":to_user, "message":message, "username":username});
+                $("#private-message-box").val("");
+                $("#private-message-dialog").dialog("close");
+                
+                //display message in log
+                 var messageBoard = document.getElementById("message-list");
+                // append li element
+                var messageList = document.createElement("li");
+                messageList.setAttribute("class", "message-list");
+                // append username span and message span
+                var spanOne = document.createElement("span");
+                var spanTwo = document.createElement("span");
+                spanOne.setAttribute("class", "username-span");
+                spanOne.textContent = "Private message to " + to_user+": ";
+                spanTwo.setAttribute("class", "message-span");
+                spanTwo.textContent = message;
+                // append each other
+                messageBoard.appendChild(messageList);
+                messageList.appendChild(spanOne);
+                messageList.appendChild(spanTwo);
+            });
+            
+            //receive private message
+            socketio.on("private_message_to_client", function(data){
+                var messageBoard = document.getElementById("message-list");
+                // append li element
+                var messageList = document.createElement("li");
+                messageList.setAttribute("class", "message-list");
+                // append username span and message span
+                var spanOne = document.createElement("span");
+                var spanTwo = document.createElement("span");
+                spanOne.setAttribute("class", "username-span");
+                spanOne.textContent = "Private message from "+data.from_user + ":  ";
+                spanTwo.setAttribute("class", "message-span");
+                spanTwo.textContent = data.message;
+                // append each other
+                messageBoard.appendChild(messageList);
+                messageList.appendChild(spanOne);
+                messageList.appendChild(spanTwo);
+            });
+
+        </script>
+   </body>
+   
+</html>

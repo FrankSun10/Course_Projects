@@ -1,0 +1,73 @@
+1. Sam, I think you are right about deleting the title of an event, and I have dropped the title attribute for event table. The events table now looks like:
+
+mysql> describe events;
++---------+----------------------+------+-----+---------+----------------+
+| Field   | Type                 | Null | Key | Default | Extra          |
++---------+----------------------+------+-----+---------+----------------+
+| owner   | varchar(50)          | NO   | MUL | NULL    |                |
+| date    | char(10)             | NO   |     | NULL    |                |
+| content | varchar(250)         | NO   |     | NULL    |                |
+| id      | smallint(5) unsigned | NO   | PRI | NULL    | auto_increment |
++---------+----------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+
+2. change the date attribute of event entity ot char(11) , so the format for the date is dd-Mar-2016
+
++--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| events | CREATE TABLE `events` (
+  `owner` varchar(50) NOT NULL,
+  `date` char(11) NOT NULL,
+  `content` varchar(250) NOT NULL,
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  KEY `owner` (`owner`),
+  CONSTRAINT `events_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+
+3. add category column for events (creative part)
+
+mysql> describe events ; 
++----------+-------------------------------------+------+-----+---------+----------------+
+| Field    | Type                                | Null | Key | Default | Extra          |
++----------+-------------------------------------+------+-----+---------+----------------+
+| owner    | varchar(50)                         | NO   | MUL | NULL    |                |
+| date     | char(11)                            | NO   |     | NULL    |                |
+| content  | varchar(250)                        | NO   |     | NULL    |                |
+| id       | smallint(5) unsigned                | NO   | PRI | NULL    | auto_increment |
+| category | enum('urgent','important','normal') | NO   |     | normal  |                |
++----------+-------------------------------------+------+-----+---------+----------------+
+
+
+4.
+ create table sharedevents(
+owner varchar(50) not null,
+sharedto varchar(50) not null,
+content varchar(250) not null,
+id smallint unsigned not null auto_increment,
+category enum('urgent', 'important', 'normal') not null  default 'normal',
+primary key(id),
+foreign key(owner) references users(username),
+foreign key(sharedto) references users(username)
+) engine= innodb default character set=utf8 collate= utf8_general_ci;
+
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sharedevents | CREATE TABLE `sharedevents` (
+  `owner` varchar(50) NOT NULL,
+  `sharedto` varchar(50) NOT NULL,
+  `content` varchar(250) NOT NULL,
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `category` enum('urgent','important','normal') NOT NULL DEFAULT 'normal',
+  `date` char(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `owner` (`owner`),
+  KEY `sharedto` (`sharedto`),
+  CONSTRAINT `sharedevents_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`username`),
+  CONSTRAINT `sharedevents_ibfk_2` FOREIGN KEY (`sharedto`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)

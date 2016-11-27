@@ -1,0 +1,183 @@
+.ui-dialog{
+    clear: both;
+}
+nav {
+    display: block;
+    padding: 12px;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #b30059;
+
+}
+/* style for the welcome message */
+#hello-user{
+    color: white;
+    font-size: 1.2em;
+    float: left;
+}
+
+.header-button{
+    height: 30px;
+    display: inline;
+    float: right;
+    margin-right: 10px;
+}
+
+/*style for the page title, "EVENT CALENDAR" */
+#page-title{
+    color: white;
+    font-size: 1.5em;
+    float: left;
+    margin-left: 33%;
+}
+
+/* style for all the pop-up dialog forms */
+.dia-forms{
+    display: none;
+    text-align:left;
+    padding: 5px;
+    width: 200px;
+}
+#register-button{
+    float: right;
+}
+#logout{
+    display: none;
+}
+
+/* styles for the Today and current month block*/
+#time-nav{
+    display: block;
+    margin: 10px 10px 10px 0px;
+    padding: 12px;
+    width: 20%;
+    background-color: #b30059;
+    text-align: center;
+    float: left;
+}
+#today-box{
+    font-size: 1.2em;
+    color: white;
+    border: solid;
+}
+.month-box{
+    display: inline;
+    margin:15px 5px 2px 5px;
+}
+#month-info{
+    color: white;
+    font-size: 1.2em;
+}
+.user-group-li{
+    color:white;
+    text-decoration: underline;
+    float:left;
+}
+
+/* styles for the calendar part*/
+#calendar-block{
+    display: block;
+    margin: 15px 0px 0px 15px;
+    width: 74%;
+    float: left;
+    background-color:#cce6ff;
+}
+#calendar-table{
+    width:100%;
+    text-align: center;
+    table-layout: fixed;
+    overflow: hidden;
+}
+td{
+    overflow: hidden;
+    white-space: nowrap;
+}
+.weekdays-name{
+    border-left: solid thin;
+    border-bottom: solid thick;
+    border-color: white;
+    padding: 10px 0px 5px 0px;
+    width: 13.2%;
+    
+}
+#head-Saturday{
+    border-right: solid thin;
+    border-right-color: white;
+}
+
+.day_cell{ /* this is the style for the calender cell*/
+    table-layout: fixed;
+    border: solid thin;
+    border-color: white;
+    text-align: left;
+    vertical-align: top;
+    width: 13.2%;
+    height: 120px;
+    overflow: hidden;
+}
+
+/*styles for edit and delete button */
+#event-edit-save-button{
+    float: left;
+}
+#event-delete-button{
+    float: right;
+}
+#event-edit-content{
+    width: 250px;
+}
+#event-edit-content{
+    font-size: small;
+}
+
+/*styles for category block*/
+.category-block{
+    font-size: medium;
+}
+
+/*styles for share and group block*/
+<<<<<<< HEAD
+
+#share-and-group-nav, #user-groups-nav{
+    display: none;
+    margin: 50px 0px 0px 0px;
+    border-top-width: 20px;
+    border-top: solid;
+    border-top-color: white;
+    padding: 30px 0px 0px 0px;
+    
+}
+
+.share-link{
+    display: block;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    background-color: white;
+    float: inherit;
+}
+
+/*style for share button */
+#share-button{
+    display: block;
+    margin-left: 100px;
+}
+
+/*styles for users-name-sheet*/
+#users-name-dialog{
+    display: none;
+}
+#users-select-ok-button{
+    float: right;
+}
+
+
+
+
+
+
+
+
+

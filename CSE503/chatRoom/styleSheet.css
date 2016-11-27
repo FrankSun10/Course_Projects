@@ -1,0 +1,125 @@
+body{
+    background-color: teal;
+}
+#header-div{
+    display: block;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
+#title{
+    color: white;
+    font-size: 2.0em;
+}
+#get-name-link{
+    color: white;
+    font-size: 1.2em;
+}
+#chat-div{
+    display: block;
+    margin-top: 70px;
+    margin-left: 120px;
+    margin-right: 50px;
+}
+.board-header{
+    padding: 10px;
+    background-color: blue;
+    text-align: left;
+    color: white;
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: #cc0066;
+}
+.board-body{
+    display: block;
+    min-height: 350px;
+    border: solid thin;
+    border-radius: 10px;
+    background-color: #e6ffe6;
+}
+#user-board{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+}
+#message-board{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 50%;
+}
+#room-board{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+}
+.board-list{
+    border-radius: 5px;
+    text-align: center;
+    padding-left:  0;
+    list-style-type: none;
+    height:auto;
+    line-height: 30px;
+    background-color: #33ff33;
+    margin: auto;
+    margin-top: 5px;
+    color: white;
+    width: 90%;
+}
+.username-span{
+    color: red;
+}
+#message-list span{
+    text-decoration: underline;
+}
+#message-list img{
+    max-width:100%;
+    max-height:100%;
+}
+
+/* style for input message box*/
+#message-send-block, #create-room-block, #kick-user-block{
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 5px;
+}
+#message-input{
+    display: inline-block;
+}
+#message-input-box{
+    width:100%;
+}
+#message-send-button{
+    height: 55px;
+    vertical-align: top;
+    border-radius: 5px;
+}
+#create-room-button, #kick-user-button, #ban-user-button{
+    display: none;
+    height: 55px;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+.dialog-form-button{
+    border-radius: 5px;
+    float: right;
+}
+.dialog-form{
+    display: none;
+    font-size: medium;
+}
+
+#leave-room-button{
+    display: none;
+    float: right;
+    border-radius: 5px;
+}
+#creator-leave-room-yes, #kick-agree-button{
+    float: left;
+}
+#creator-leave-room-no, #kick-disagree-button{
+    float: right;
+}

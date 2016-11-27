@@ -1,0 +1,49 @@
+
+Creative Project Description
+
+1. Idea: Private Kitchen
+
+    Create a webpage where users could display their private cuisines and comment on other cuisines. Regitered users could add new cuisines with pictures 
+    and detailed process of the cuisine to the database. The database should be a document-oriented database. like MongoDB.
+
+2.Grading
+
+   MongoDB (20 points)
+
+	(1)  Set up MongoDB server and it can succefully run on the instance (5 points)
+	(2)  Documents in MongoDB database should have a primary key (3 points)
+	(3)  Connection to the database should be realized, data could be added, updated, reterived and deleted in the database (12 points)
+    
+  User Management (18 points)
+
+	(1) New users can register a username ( 3 points)
+	(2) Passwords should be hashed usring salted one-way encryption (3 points)
+	(3) Users can log in and log out (6 points)
+	(5) Registered users can post new cuisine and make comments (6 points)
+
+  Cuisine and Comment Management (30 points)
+
+	(1) A posted cuision should have at least one image (3 points)
+	(2) A posted cuision should have a detailed procedure (3 points)
+	(3) A list of all cuisines should be available and there is a link for each cuisine that can diplay the details of the cuisine (10 points)
+	(4) A comment should have creater, content and rating sections (6 points)
+	(5) A cuisine can be modified and deleted by its creater (4 points)
+	(6) A comment can be modified and deleted by its creater (4 points)
+ 
+ Best Practices (12 points)
+
+	(1) Code is well formatted and easy to read, with proper commenting (3 points)
+	(2) CSRF tokens are passed when creating, editing and deleting comments and cuisines (5 points)
+	(3) Session cookie is Http-only (2 points)
+	(3) All pages pass W3C validator (2 points)
+
+  Usability (5 points)
+
+	(1) Site is intuitive to use and navigate (4 points)
+	(2) Site is visually appealing (1 point)
+
+  Rubric Submit (5 points)
+
+	(1) Submit Rubic to Bitbucket (5 points)
+  
+  Creative Part (10 points)

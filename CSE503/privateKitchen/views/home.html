@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 style="margin-bottom: 0;" >Private Kitchen</h1>
+    
+    <!-- login and register buttons-->
+    <div id="register-login" style=" float: right; display: inline-block; margin: 0;">
+        <a href="#/login" type="button" class="btn btn-primary">Login</a>
+        <a href="#/register" type="button" class="btn btn-primary">Register</a>
+    </div>
+    <!-- logout and other buttons-->
+    <div id="after-login" style="display: inline-block; float:right; margin: 0" class="row">
+        <a href="#/newCuisine" type="button" class="btn btn-primary" id="new-cuisine-button">New Cuisine</a>
+        <a href="#/home" type="button" class="btn btn-primary" id="logout-button">Logout</a>
+    </div>
+    <br>
+    
+    <!--sidebar-->
+    <div class = "row" style="padding-top: 30px;">
+        <div class="col-md-2">
+            <strong>Search:</strong>
+            <input ng-model ="query" class="form-control"/>
+            <br>
+            <strong>Sort by:</strong>
+            <select ng-model="orderProp" class="form-control">
+                <option value="">  </option>    
+                <option value="cuisineName">Alphabetical</option>
+                <option value="category">Category</option>
+            </select>
+        </div>
+   
+        <div class="col-md-10">
+            <ul class="cusines">
+                <li ng-repeat = "cuisine in cuisines | filter:query | orderBy:orderProp" class="thumbnail">
+                    <a href="#/cuisines/{{cuisine._id}}" class="thumb"><img ng-src="{{cuisine.cuisineImage}}" alt="Image"></a>
+                    <a href="#/cuisines/{{cuisine._id}}"><strong>Cuisine: {{cuisine.cuisineName}}</strong></a>
+                    <p>
+                        <strong>Category: {{cuisine.category}}</strong><br>
+                        Step1: {{cuisine.cuisineStep[0]}} <br>
+                        Step2: {{cuisine.cuisineStep[1]}} <br>
+                        Step3: {{cuisine.cuisineStep[2]}}  ...<br> 
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>

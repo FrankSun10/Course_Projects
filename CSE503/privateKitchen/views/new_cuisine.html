@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>New Cuisine</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+   <img id= "id">
+   <h2> New Cuisine</h2>
+   <br>
+    <a href="#/home" type="button" class="btn btn-info" id="back-to-home-button"><strong>Back To Home</strong></a>
+    <a type="button" class="btn btn-success" id="cuisine-save-button"><strong>Save</strong></a>
+    <br><br>
+
+ 
+    
+    <form class="form-horizontal" role ="form" id="cuisine-form">
+        <!-- add category-->
+        <div class="radio form-group ">
+            <strong class=" control-label">Category:</strong>
+            <label><input type="radio" ng-model="category" name="category" value="American" /><strong>American  </strong></label>
+            <label><input type="radio" ng-model="category" name="category" value="Chinese" /><strong>Chinese  </strong></label>
+            <label><input type="radio" ng-model="category" name="category" value="French" /><strong>Frence  </strong></label>
+            <label><input type="radio" ng-model="category" name="category" value="Other" /><strong>Other  </strong></label>
+        </div>
+        <br>
+        <!--cuisine title-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="cuisine-title">Title:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="cuisine-title" placeholder="Enter title" />
+            </div>
+        </div>
+        <!--  add stpe 1-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="step1">Step 1:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="step1" placeholder="Enter the first step" ng-model="step[0]"/>
+            </div>
+        </div>
+        <!--  add stpe 2-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="step2">Step 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="step2" placeholder="Enter the second step" ng-model="step[1]"/>
+            </div>
+        </div>
+        <!--  add stpe 3-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="step3">Step 3:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="step3" placeholder="Enter the third step" ng-model="step[2]"/>
+            </div>
+        </div>
+        <!-- add step button -->
+        <input type="button" id="add-step" class="btn btn-info" value="Add more steps" />
+            
+    </form>
+    <br>
+     
+    <form class="form-horizontal" role ="form" method= "post" action="/home" enctype="multipart/form-data" id="image-form"> 
+        <input type="hidden" name="_csrf" id="csrf"  value="<% csrfToekn %> "/> 
+        <input type="file" name="upl" accept="image/*" style= "display:none;" class="form-control" " id="cuisine-image" />
+        <label class="control-label col-sm-2" for="subfile">Select Image:</label>
+        <div class="input-append">
+            <div class="col-xs-8"> 
+            <input type="text" class="form-control" id="subfile" placeholder="Only one image" />
+            </div>
+            <a class="btn btn-info" onclick="$('#cuisine-image').click();">Browse</a>
+            <input type="submit"  id="image-submit-button" class="btn btn-info"  />
+        </div>     
+    </form>
+   
+</body>
+</html>

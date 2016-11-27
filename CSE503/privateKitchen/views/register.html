@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <br>
+    <br>
+    <div id="homebar">
+        <a href="#/home" type="button" class="btn btn-primary btn-block"><strong>Back To Home</strong></a>
+    </div>
+    <div id="register">
+        <h3>Register</h3>
+        <form class="form-horizontal" role= "form">
+            <div class="form-group col-sm-5">
+                <label class="control-label">FirstName:</label>
+                <input class="form-control" type="text" id="firstName" placeholder="First Name" ng-model= user.firstName required>
+                <label class="control-label">LastName:</label>
+                <input class="form-control" type="text" id ="lastName" placeholder="Last Name" ng-model= user.lastName required>
+                <label class="control-label">Username:</label>
+                <input class="form-control" type="text" id="username" placeholder="username" ng-model= user.username required>
+                <label class="control-label">Password:</label>
+                <input class="form-control" type="password" id= "password" placeholder="Password" ng-model= user.password required>
+                <br>
+                <input type="button" class = "btn btn-primary" value= "submit" id="register-button" >
+
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

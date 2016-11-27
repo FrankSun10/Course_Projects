@@ -1,0 +1,5 @@
+1. Implemented search bar for searching different cuisines
+2.Added category for each cuisine.
+3. Enabled cuisine ordering by name and category
+4. Each session has a duration time of 30 minutes
+5. Enhanced site secuity by enforcing the server can only use cookies over https and delete cookies when the browser is closed.

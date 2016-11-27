@@ -1,0 +1,51 @@
+#register, #login{
+    
+	position: absolute;
+    left:35%;
+    top:15%;
+    width: 80%;
+    height: 70%;
+}
+
+#homebar{
+    position: absolute;
+    left:35%;
+    width: 32%
+}
+
+body {
+  padding-top: 20px;
+}
+
+.cuisines {
+  list-style: none;
+}
+
+.thumb {
+  float: left;
+  margin: -0.5em 1em 1.5em 0;
+  padding-bottom: 1em;
+  height: 130px;
+  width: 130px;
+}
+
+.thumbnail {
+  clear: both;
+  height: 135px;
+  padding-top: 15px;
+}
+
+img.cuisine {
+  float: left;
+  border: 1px solid black;
+  margin-right: 3em;
+  margin-bottom: 2em;
+  background-color: white;
+  padding: 1em;
+  height: 300px;
+  width: 300px;
+}
+
+h1 {
+  border-bottom: 1px solid gray;
+}

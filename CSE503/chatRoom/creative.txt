@@ -1,0 +1,17 @@
+1.Team members:
+	 Frank Sun (Yanqing Sun), 443269
+	 Samuer Teeter,  444847
+
+2.
+http://ec2-54-165-154-170.compute-1.amazonaws.com:3456/client.html
+
+3. Creative part description:
+
+(1)  Add different categories for chat rooms. Specifically, there are three categories, Academic, Social and Other, which are display as A, S and Other respectively on the page. 
+(2) Add voting process when kick a user out a room. The idea is the creator cannot simply kick a user arbitrarily, only when a certain number of the users in the room agreed, the creator can. This certain number is (n-1)/2, 
+     "n" is the number of users in the room.
+(3)If a user enters a url in a message, the url will automatically be converted to a hyperlink.
+(4)If a user enters an image url, the image will be displayed in the chat log.
+
+4.
+No specification is needed to access the chat room page

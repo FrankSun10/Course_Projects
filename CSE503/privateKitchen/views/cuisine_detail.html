@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>New Cuisine</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <div style="float: left; vertical-align: top; display: inline-block">
+        <br>
+        <img src={{cuisine.cuisineImage}} alt="Image" class="cuisine" >
+    </div>
+    
+    <div style="vertical-align: top; display: inline-block; width: 70%">
+        <h1 style="margin-bottom: 0;">{{cuisine.cuisineName}}</h1>
+        <strong>Category:  {{cuisine.category}}</strong> 
+        <a type="button"  class="btn btn-danger" style="display: none; float: right" id="edit-delete-button">Delete</a>  
+        <a type="button"  class="btn btn-success" style="display: none; float: right" id="edit-save-button">Save</a>  
+        <a type="button" href="#/home" class="btn btn-info" style="float: right">Home</a>
+        <br>
+        <form class="form-horizontal" role ="form" id="cuisine-form">
+            <div ng-repeat = "step in steps track by $index" class="form-group col-sm-10">
+                <strong>Step{{$index + 1}}: </strong>   
+                <input type="text" class="form-control" id="step{{$index + 1}}"  value = {{step}} ng-readonly="isNotCreater" />
+            </div>
+            <div  class="form-group col-sm-10" id="new-steps">
+                <input type="button" id="edit-add-step" class="btn btn-info" value="Add more steps" style="display: none"/>
+            </div>
+        </form>
+        
+    </div>
+    
+    <!-- comment block-->
+    <h3>Comments:</h3>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Creater</th>
+                    <th>Content</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat= "comment in comments">
+                    <td>{{comment.commentCreater}}</td>
+                    <td>{{comment.commentContent}}</td>
+                    <td>{{comment.rating}}</td>
+                    <td><input type="button" class="btn btn-danger" value="Remove" ng-click ="commentRemove(comment._id, comment.commentCreater)"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- div for input comment-->
+    <div>
+        <div class="col-sm-15">
+            <input type="text" class="form-control" placeholder="Enter comments here" ng-model="newComment"/>
+        </div>
+        <input type="button" id="comment-button" class="btn btn-success" value="Comment" style="float: right;"/>
+    </div>
+    
+     <div class="radio form-group ">
+        <strong class=" control-label">Rating:</strong>
+        <label><input type="radio" ng-model="rating" name="rating" value="1" /><strong>1  </strong></label>
+        <label><input type="radio" ng-model="rating" name="rating" value="2" /><strong>2  </strong></label>
+        <label><input type="radio" ng-model="rating" name="rating" value="3" /><strong>3  </strong></label>
+        <label><input type="radio" ng-model="rating" name="rating" value="4" /><strong>4  </strong></label>
+        <label><input type="radio" ng-model="rating" name="rating" value="5" /><strong>5  </strong></label>
+     </div>
+     <div style="height: 100px"></div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+</body>
+</html>
